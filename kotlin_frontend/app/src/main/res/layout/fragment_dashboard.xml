@@ -12,21 +12,13 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Monthly progress calendar -->
-        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        <!-- Monthly progress calendar (updated for Kizitonwose CalendarView) -->
+        <com.kizitonwose.calendarview.CalendarView
             android:id="@+id/monthlyCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:mcv_selectionColor="@color/accent"
-            app:mcv_headerTextAppearance="@android:style/TextAppearance.Material.Medium"
-            app:mcv_weekDayTextAppearance="@android:style/TextAppearance.Material.Small"
-            app:mcv_dateTextAppearance="@android:style/TextAppearance.Material.Small"
-            app:mcv_showOtherDates="all"
-            app:mcv_arrowColor="@color/primary"
-            app:mcv_tileHeight="40dp"
-            app:mcv_tileWidth="40dp"
             android:layout_marginBottom="16dp"
-            />
+        />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
