@@ -11,6 +11,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // For Kizitonwose CalendarView
+        maven { setUrl("https://jitpack.io") }
     }
 }
 
