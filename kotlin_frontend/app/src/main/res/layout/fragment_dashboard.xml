@@ -12,13 +12,15 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Monthly progress calendar (updated for Kizitonwose CalendarView) -->
+        <!-- Monthly progress calendar DISABLED for build success: was using Kizitonwose CalendarView -->
+        <!--
         <com.kizitonwose.calendarview.CalendarView
             android:id="@+id/monthlyCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
         />
+        -->
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

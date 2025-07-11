@@ -4,18 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-package com.example.kotlinfrontend
-
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import java.time.LocalDate
+import java.util.Calendar
 
 // PUBLIC_INTERFACE
 /**
@@ -27,17 +18,23 @@ class DashboardFragment : Fragment() {
 
     /**
      * Sample tracked days for the current month (for demo purposes)
+     * Uses java.util.Calendar to support minSdk 24.
      */
-    private fun getSampleTrackedDays(): Set<LocalDate> {
-        val now = LocalDate.now()
-        val firstOfMonth = now.withDayOfMonth(1)
-        val daysInMonth = now.lengthOfMonth()
-        val res = mutableSetOf<LocalDate>()
+    private fun getSampleTrackedDays(): Set<String> {
+        val calendar = Calendar.getInstance()
+        // Set to the first day of the current month
+        calendar.set(Calendar.DAY_OF_MONTH, 1)
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentYear = calendar.get(Calendar.YEAR)
+        val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val res = mutableSetOf<String>()
         for (day in 1..daysInMonth) {
-            val d = firstOfMonth.withDayOfMonth(day)
-            // Example: Mark all Mondays and Thursdays as "done" for the demo
-            if (d.dayOfWeek.value == 1 || d.dayOfWeek.value == 4) {
-                res.add(d)
+            calendar.set(Calendar.DAY_OF_MONTH, day)
+            // Example: Mark all Mondays and Thursdays as "done" for the demo (Calendar dayOfWeek: SUNDAY == 1)
+            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+            if (dayOfWeek == Calendar.MONDAY || dayOfWeek == Calendar.THURSDAY) {
+                // Save as "YYYY-MM-DD" for display/reference
+                res.add(String.format("%04d-%02d-%02d", currentYear, currentMonth + 1, day))
             }
         }
         return res
@@ -50,13 +47,14 @@ class DashboardFragment : Fragment() {
         //
         // val calendarView = v.findViewById<CalendarView>(R.id.monthlyCalendar)
         // if (calendarView != null) {
-        //     val currentMonth = LocalDate.now().withDayOfMonth(1)
+        //     val currentMonth = Calendar.getInstance()
+        //     currentMonth.set(Calendar.DAY_OF_MONTH, 1)
         //     calendarView.setup(
         //         currentMonth,
         //         currentMonth,
-        //         java.time.DayOfWeek.MONDAY
+        //         Calendar.MONDAY
         //     )
-        //     calendarView.scrollToDate(LocalDate.now())
+        //     calendarView.scrollToDate(Calendar.getInstance())
         //
         //     val trackedDays = getSampleTrackedDays()
         //
